@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F7FAFC;
+    --surface: #FFFFFF;
+    --surface-hover: #F1F7FC;
+    --text-primary: #0B1F3A;
+    --text-secondary: #52657A;
+    --text-muted: #7A8CA0;
+    --border: #D8E3EE;
+    --border-light: #E2EAF1;
+    --border-accent: #B9DDED;
+    --primary: #0057A8;
+    --primary-hover: #004783;
+    --accent: #0E9FCE;
+    --selected: #EAF4FB;
+    --selected-card: #F0F8FD;
+    --success: #16845B;
+    --gold: #C58A16;
+    --error: #C93636;
+
+    --bg-primary: #F7FAFC;
+    --bg-secondary: #F1F7FC;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F1F7FC;
+
+    --foreground: #0B1F3A;
+    --card: #FFFFFF;
+    --card-foreground: #0B1F3A;
+    --popover: #FFFFFF;
+    --popover-foreground: #263B53;
+    --secondary: #F1F7FC;
+    --secondary-foreground: #263B53;
+    --muted: #F1F7FC;
+    --muted-foreground: #7A8CA0;
+    --destructive: #C93636;
+    --destructive-foreground: #FFFFFF;
+    --input: #D8E3EE;
+    --ring: #0E9FCE;
+    --radius: 0.75rem;
+  }
+
+  .dark, [data-theme="dark"] {
+    --background: #07111F;
+    --surface: #10243A;
+    --surface-hover: #172F47;
+    --text-primary: #EAF2F8;
+    --text-secondary: #AFC1D2;
+    --text-muted: #8299AD;
+    --border: #263B50;
+    --border-light: #263B50;
+    --border-accent: #16A9D8;
+    --primary: #1268B3;
+    --primary-hover: #1679C7;
+    --accent: #16A9D8;
+    --selected: #163B59;
+    --selected-card: #102E47;
+    --success: #22C55E;
+    --gold: #F59E0B;
+    --error: #EF4444;
+
+    --bg-primary: #07111F;
+    --bg-secondary: #0B1A2B;
+    --bg-card: #10243A;
+    --bg-card-hover: #172F47;
+    --bg-card-active: #102E47;
+
+    --foreground: #EAF2F8;
+    --card: #10243A;
+    --card-foreground: #EAF2F8;
+    --popover: #10243A;
+    --popover-foreground: #EAF2F8;
+    --secondary: #172F47;
+    --secondary-foreground: #EAF2F8;
+    --muted: #172F47;
+    --muted-foreground: #8299AD;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --input: #263B50;
+    --ring: #16A9D8;
+  }
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+html {
+  background-color: #F7FAFC;
+}
+
+body {
+  background-color: #F7FAFC;
+  color: #0B1F3A;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+html.dark,
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+  background-color: #07111F;
+}
+
+.dark body,
+html.dark body,
+[data-theme="dark"] body {
+  background-color: #07111F;
+  color: #EAF2F8;
+}
+
+/* Ashoka subtle watermark pattern */
+.bg-ashoka-pattern {
+  background-image: radial-gradient(rgba(30, 58, 138, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}

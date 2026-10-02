@@ -1,0 +1,90 @@
+[
+  {
+    "id": "eval-procure-1",
+    "question": "Which Indian Standard and QCO statutory order apply to public procurement of High Density Polyethylene (HDPE) pipes for drinking water distribution, and why is IS 4984:1995 obsolete?",
+    "language": "en",
+    "intent": "PROCUREMENT_STANDARD_RECOMMENDATION",
+    "expectedStandardNumber": "IS 4984:2016",
+    "expectedClause": "1.1",
+    "expectedSourceSnippet": "IS 4984:2016 covers HDPE pipes for potable water supply using virgin PE 100 resin. IS 4984:1995 is superseded as the 2016 edition incorporates mandatory Slow Crack Growth resistance testing and alignment with DPIIT Pipes QCO.",
+    "groundTruthAnswerSummary": "IS 4984:2016 (Fourth Revision) applies to HDPE water pipes under the mandatory DPIIT Quality Control Order. IS 4984:1995 is withdrawn because it lacks modern PE 100 resin classification, Slow Crack Growth (SCG) testing, and strict carbon black dispersion limits.",
+    "category": "Procurement - Water Infrastructure"
+  },
+  {
+    "id": "eval-procure-2",
+    "question": "Our tender for metro viaduct structural reinforcement specifies 'Fe 500D TMT bars from SAIL/TATA/JSW only citing IS 1786:1985'. Audit this against GFR Rule 144(i) and standard validity.",
+    "language": "en",
+    "intent": "GFR_COMPLIANCE_AUDIT",
+    "expectedStandardNumber": "IS 1786:2008",
+    "expectedClause": "8.1",
+    "expectedSourceSnippet": "Restricting procurement to named primary steel producers violates GFR 2017 Rule 144(i). IS 1786:1985 is superseded by IS 1786:2008, which defines high-ductility Fe 500D with TS/YS >= 1.10.",
+    "groundTruthAnswerSummary": "The tender contains 2 critical violations: (1) Naming specific primary producers (SAIL/TATA/JSW) violates GFR 2017 Rule 144(i) anti-discriminatory rules; the specification must be neutral for all valid BIS CM/L licensees. (2) IS 1786:1985 is obsolete and must be upgraded to IS 1786:2008 (Fe 500D) under the Steel QCO.",
+    "category": "Procurement - GFR Compliance & Steel"
+  },
+  {
+    "id": "eval-procure-3",
+    "question": "What Indian Standards, CRS requirements, and anti-islanding tests apply to grid-connected solar string inverters on GeM?",
+    "language": "en",
+    "intent": "PROCUREMENT_STANDARD_RECOMMENDATION",
+    "expectedStandardNumber": "IS 16221 (Part 2):2015",
+    "expectedClause": "5.4",
+    "expectedSourceSnippet": "Grid-connected solar inverters must comply with IS 16221 (Part 2):2015 for general & electrical safety and IS 16169:2014 / IEC 62116 for anti-islanding protection under BIS Compulsory Registration Scheme (CRS Scheme II).",
+    "groundTruthAnswerSummary": "Solar grid inverters require mandatory registration under BIS CRS (Scheme II) conforming to IS 16221 (Part 2):2015 (Safety) and IS 16169:2014 (Anti-islanding test with <= 2.0s trip time). Bidders must provide a valid BIS R-Number.",
+    "category": "Procurement - Renewable Energy"
+  },
+  {
+    "id": "eval-procure-4",
+    "question": "What are the Pre-Dispatch Inspection (PDI) lot inspection criteria and acceptance tests for IS 4984 HDPE pipes?",
+    "language": "en",
+    "intent": "PDI_INSPECTION_SCHEDULE",
+    "expectedStandardNumber": "IS 4984:2016",
+    "expectedClause": "8.1",
+    "expectedSourceSnippet": "Pre-Dispatch Inspection of IS 4984 HDPE pipes involves sampling per IS 2500 (Part 1), 100-hour hydrostatic pressure test at 20°C (hoop stress 12.0 MPa), 165-hour test at 80°C (5.4 MPa), carbon black content (2.0-2.5%), and dimensional verification.",
+    "groundTruthAnswerSummary": "PDI lot inspection protocol includes: (1) 100% visual and dimensional check (diameter, wall thickness, ovality), (2) Hydrostatic internal pressure proof test at 20°C (100h) and 80°C (165h), (3) Carbon black content (2.0-2.5%) and dispersion test, and (4) Longitudinal reversion test at 110°C.",
+    "category": "Procurement - Quality Assurance"
+  },
+  {
+    "id": "eval-procure-5",
+    "question": "Why is IS 800:1984 superseded, and what is the active standard for structural steel design in public tenders?",
+    "language": "en",
+    "intent": "SUPERSEDED_STANDARD_CHECK",
+    "expectedStandardNumber": "IS 800:2007",
+    "expectedClause": "1.1",
+    "expectedSourceSnippet": "IS 800:1984 is superseded by IS 800:2007 (General Construction in Steel - Code of Practice, Third Revision). The 2007 version shifts the fundamental design philosophy from Working Stress Method (WSM) to Limit State Method (LSM) with seismic and fire design provisions.",
+    "groundTruthAnswerSummary": "IS 800:1984 is withdrawn and replaced by IS 800:2007. The key upgrade is the adoption of Limit State Method (LSM) design philosophy, inclusion of seismic load combinations per IS 1893, and fire-resistant steel design provisions.",
+    "category": "Procurement - Structural Standards"
+  },
+  {
+    "id": "eval-procure-6",
+    "question": "GeM tender me brand make mention karna GFR Rule 144(i) ke mutabiq allowed hai ya nahi?",
+    "language": "hinglish",
+    "intent": "GFR_COMPLIANCE_AUDIT",
+    "expectedStandardNumber": "GFR 2017 Rule 144(i)",
+    "expectedClause": "Rule 144(i)",
+    "expectedSourceSnippet": "Under GFR 2017 Rule 144(i), technical specifications must be generic, functional, and measurable. Mentioning specific brand names or proprietary makes without 'or equivalent standard' is strictly prohibited in public tenders.",
+    "groundTruthAnswerSummary": "Nahi, GeM ya kisi bhi public procurement tender me specific brand names ya proprietary makes (jaise 'ABB only' ya 'SAIL only') mention karna GFR 2017 Rule 144(i) ka direct violation hai. Tenders me generic technical parameters aur applicable Indian Standards (IS / BIS Certification) likhna mandatory hai.",
+    "category": "Procurement - Multilingual Compliance"
+  },
+  {
+    "id": "eval-procure-7",
+    "question": "Which standard applies to commercial outdoor LED street lighting and what mandatory BIS scheme is required?",
+    "language": "en",
+    "intent": "PROCUREMENT_STANDARD_RECOMMENDATION",
+    "expectedStandardNumber": "IS 10322 (Part 5/Sec 3):2012",
+    "expectedClause": "1.1",
+    "expectedSourceSnippet": "Outdoor LED street lighting luminaires are governed by IS 10322 (Part 5/Sec 3):2012 (Safety) and IS 16107 (Part 2/Sec 1) (Performance) with mandatory BIS Compulsory Registration Scheme (CRS Scheme II).",
+    "groundTruthAnswerSummary": "Commercial LED street luminaires must comply with IS 10322 (Part 5/Sec 3):2012 for safety and IS 16107 (Part 2/Sec 1) for performance, carrying mandatory BIS CRS Scheme-II registration with unique R-number.",
+    "category": "Procurement - Electrical & Lighting"
+  },
+  {
+    "id": "eval-procure-8",
+    "question": "Where can procurement officers find NABL and BIS recognized testing laboratories for pre-dispatch inspection in India?",
+    "language": "en",
+    "intent": "LABORATORY_LOOKUP",
+    "expectedStandardNumber": "BIS Laboratory Recognition Scheme (LRS)",
+    "expectedClause": "LRS Regulations",
+    "expectedSourceSnippet": "BIS Central Laboratory (Sahibabad/Delhi NCR), Regional Laboratories (Mumbai, Kolkata, Chennai, Chandigarh), and accredited NABL private labs are authorized for statutory procurement testing.",
+    "groundTruthAnswerSummary": "Procurement testing can be conducted at BIS Central Laboratory (Sahibabad), Regional Laboratories (Mumbai, Kolkata, Chennai, Chandigarh), or over 500+ private NABL accredited (ISO/IEC 17025) testing facilities listed on the BIS Laboratory Recognition Scheme (LRS) directory.",
+    "category": "Procurement - Lab Testing"
+  }
+]

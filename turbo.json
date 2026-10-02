@@ -1,0 +1,56 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV"
+  ],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "DIRECT_URL",
+    "PORT",
+    "API_PREFIX",
+    "CORS_ORIGIN",
+    "JWT_SECRET",
+    "JWT_REFRESH_SECRET",
+    "JWT_EXPIRES_IN",
+    "JWT_REFRESH_EXPIRES_IN",
+    "LLM_PROVIDER",
+    "OPENROUTER_API_KEY",
+    "OPENROUTER_MODEL",
+    "OPENROUTER_BASE_URL",
+    "OPENROUTER_SITE_URL",
+    "OPENROUTER_SITE_NAME",
+    "OPENROUTER_TRANSLATION_MODEL",
+    "ANTHROPIC_API_KEY",
+    "ANTHROPIC_MODEL",
+    "OPENAI_API_KEY",
+    "OPENAI_MODEL",
+    "EMBEDDING_PROVIDER",
+    "OPENROUTER_EMBEDDING_MODEL",
+    "EMBEDDING_API_KEY",
+    "EMBEDDING_MODEL",
+    "RERANKER_PROVIDER",
+    "RERANKER_API_KEY",
+    "TRANSLATION_PROVIDER",
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_APP_NAME",
+    "NEXT_PUBLIC_ENABLE_DEMO_DATA"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
