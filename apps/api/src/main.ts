@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
   }
 }
 
-import { configurePrismaEngine } from "./common/prisma-engine";
+import { configurePrismaEngine } from "./prisma/prisma-engine";
 
 // Configure Prisma Engine immediately on process startup
 configurePrismaEngine();

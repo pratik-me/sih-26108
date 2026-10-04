@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../common/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CertificationScheme, ComplianceRoadmapStep } from '@bis/shared-types';
 import { SEED_SCHEMES } from '../common/seed-data';
 

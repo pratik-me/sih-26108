@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "../common/prisma.service";
+import { PrismaService } from "../prisma/prisma.service";
 import {
   ChatMessage,
   ChatSession,
@@ -41,8 +41,7 @@ export class ChatService {
           include: { messages: { orderBy: { createdAt: "asc" } } },
         });
 
-        // Existing session check: if the session has an owner and a different
-        // user accesses it, restrict access.
+        // Existing session check: if the session has an owner and a different user accesses it, restrict access.
         if (
           dbSession &&
           dbSession.userId &&

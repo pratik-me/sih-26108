@@ -32,6 +32,7 @@ export function configurePrismaEngine(): string | null {
 
   const candidateDirs = [
     __dirname,
+    path.join(__dirname, '..'),
     path.join(__dirname, 'dist'),
     process.cwd(),
     path.join(process.cwd(), 'dist'),
@@ -54,7 +55,7 @@ export function configurePrismaEngine(): string | null {
       process.env.PRISMA_QUERY_ENGINE_LIBRARY = candidate;
       console.log(`[Prisma Engine] Located query engine at: ${candidate}`);
 
-      // Ensure /tmp/prisma-engines also has a copy (Prisma's built-in fallback search path)
+      // Ensure /tmp/prisma-engines also has a copy
       try {
         const tmpDir = '/tmp/prisma-engines';
         if (!fs.existsSync(tmpDir)) {

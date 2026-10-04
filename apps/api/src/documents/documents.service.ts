@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../common/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { StructureAwareDocumentChunker, getEmbeddingProvider } from '@bis/ai';
 import { StandardStatus } from '@bis/shared-types';
 import { randomUUID } from 'crypto';

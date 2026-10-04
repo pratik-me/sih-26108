@@ -27,7 +27,6 @@ import { CurrentUser } from '../common/decorators/current-user.decorator';
 
 @ApiTags('Chat & AI Assistant')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('chat')
 export class ChatController {
   constructor(private chatService: ChatService) {}
