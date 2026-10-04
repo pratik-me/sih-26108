@@ -21,9 +21,7 @@ import {
   Scale,
   Sparkles,
   Bot,
-  Layers,
-  AlertOctagon,
-  ShieldCheck
+  ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
@@ -97,19 +95,19 @@ export function Header() {
     pathname === "/standards" || pathname === "/standards/recommend";
 
   const navLinks = [
-    { href: "/procure", label: "Tender Analyzer", icon: FileCheck2 },
-    { href: "/compliance", label: "GFR 144(i) Audit", icon: Scale },
+    { href: "/procure", label: "Analyzer", description: "Analyze Tenders", icon: FileCheck2 },
+    { href: "/compliance", label: "Audit", description: "GFR 144(i) Audit", icon: Scale },
     { href: "/testing", label: "PDI & Testing", icon: FlaskConical },
-    { href: "/laboratories", label: "Recognized Labs", icon: Building2 },
-    { href: "/chat", label: "AI Workspace", icon: Bot },
+    { href: "/laboratories", label: "Labs", description: "Recognised Labs", icon: Building2 },
+    { href: "/chat", label: "Chat", description: "Ask Chatbot", icon: Sparkles },
     { href: "/reports", label: "Dossiers", icon: FileBarChart2 },
   ];
 
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-xl backdrop-saturate-150 ${isScrolled
-          ? "bg-white/85 dark:bg-[#07111F]/85 border-b border-[#E2EAF1]/80 dark:border-[#263B50]/80 shadow-sm shadow-[#0B1F3A]/5"
-          : "bg-white/75 dark:bg-[#07111F]/75 border-b border-[#E2EAF1]/50 dark:border-[#263B50]/50"
+        ? "bg-white/85 dark:bg-[#07111F]/85 border-b border-[#E2EAF1]/80 dark:border-[#263B50]/80 shadow-sm shadow-[#0B1F3A]/5"
+        : "bg-white/75 dark:bg-[#07111F]/75 border-b border-[#E2EAF1]/50 dark:border-[#263B50]/50"
         }`}
     >
       {/* Main Nav Bar */}
@@ -120,8 +118,8 @@ export function Header() {
             href="/"
             className="flex items-center gap-2.5 shrink-0 group mr-1"
           >
-            <div className="flex items-center gap-2">
-              <div className="shrink-0 relative">
+            <div className="flex flex-col items-center gap-2 shrink-0 relative">
+              <div className="flex items-center gap-2">
                 <Image
                   src={"/BIS-LOGO.png"}
                   alt="BIS Logo"
@@ -131,18 +129,13 @@ export function Header() {
                   className="rounded"
                   unoptimized
                 />
+                <span className="text-base font-black tracking-tight text-[#0B1F3A] dark:text-[#F1F5F9] whitespace-nowrap">
+                  Manak Setu
+                </span>
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-base font-black tracking-tight text-[#0B1F3A] dark:text-[#F1F5F9] whitespace-nowrap">
-                    Manak Setu <span className="text-[#0057A8] dark:text-[#16A9D8] font-extrabold">AI</span>
-                  </span>
-                  <span className="text-[10px] uppercase font-bold bg-[#EAF4FB] dark:bg-[#163B59] text-[#0057A8] dark:text-[#16A9D8] px-1.5 py-0.2 rounded border border-[#B9DDED] dark:border-[#263B50]">
-                    SIH 26108
-                  </span>
-                </div>
                 <p className="text-[10px] text-[#52657A] dark:text-[#8299AD] font-medium leading-none whitespace-nowrap">
-                  BIS & GeM Procurement Recommendation Engine
+                  BIS & GeM Procurement AI
                 </p>
               </div>
             </div>
@@ -154,14 +147,14 @@ export function Header() {
             <Link
               href="/procure"
               className={`group inline-flex items-center gap-1 xl:gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] xl:text-xs font-semibold whitespace-nowrap transition-all duration-200 ${pathname === "/procure"
-                  ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
-                  : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
+                ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
+                : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
                 }`}
             >
               <FileCheck2
                 className={`w-3.5 h-3.5 shrink-0 transition-colors ${pathname === "/procure"
-                    ? "text-[#0057A8] dark:text-[#16A9D8]"
-                    : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
+                  ? "text-[#0057A8] dark:text-[#16A9D8]"
+                  : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
                   }`}
               />
               <span>Tender Analyzer</span>
@@ -190,17 +183,17 @@ export function Header() {
                 }}
                 onFocus={openStandardsMenu}
                 className={`group inline-flex items-center gap-1 xl:gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] xl:text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${isStandardsActive
-                    ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
-                    : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
+                  ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
+                  : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
                   }`}
               >
                 <Search
                   className={`w-3.5 h-3.5 shrink-0 transition-colors ${isStandardsActive
-                      ? "text-[#0057A8] dark:text-[#16A9D8]"
-                      : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
+                    ? "text-[#0057A8] dark:text-[#16A9D8]"
+                    : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
                     }`}
                 />
-                <span>Standards & QCO</span>
+                <span>Standards</span>
                 <ChevronDown
                   className={`w-3 h-3 transition-transform duration-200 ${standardsDropdownOpen ? "rotate-180 text-[#0057A8] dark:text-[#16A9D8]" : ""
                     }`}
@@ -258,14 +251,14 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={`group inline-flex items-center gap-1 xl:gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] xl:text-xs font-semibold whitespace-nowrap transition-all duration-200 ${isActive
-                      ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
-                      : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
+                    ? "bg-[#EAF4FB] text-[#0057A8] font-bold border border-[#B9DDED] dark:bg-[#163B59] dark:text-[#16A9D8] dark:border-[#263B50] shadow-2xs"
+                    : "text-[#263B53] dark:text-[#AFC1D2] hover:text-[#0057A8] dark:hover:text-[#FFFFFF] hover:bg-[#F1F7FC] dark:hover:bg-[#172F47]"
                     }`}
                 >
                   <Icon
                     className={`w-3.5 h-3.5 shrink-0 transition-colors ${isActive
-                        ? "text-[#0057A8] dark:text-[#16A9D8]"
-                        : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
+                      ? "text-[#0057A8] dark:text-[#16A9D8]"
+                      : "text-[#526B83] dark:text-[#AFC1D2] group-hover:text-[#0057A8] dark:group-hover:text-[#16A9D8]"
                       }`}
                   />
                   <span>{link.label}</span>

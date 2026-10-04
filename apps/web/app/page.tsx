@@ -6,35 +6,23 @@ import { useRouter } from "next/navigation";
 import { UserRole } from "@bis/shared-types";
 import {
   Search,
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
-  BookOpen,
   FlaskConical,
-  Building2,
   CheckCircle2,
   FileCheck2,
   Scale,
-  Compass,
   AlertOctagon,
-  FileText,
-  FileBarChart2,
-  Download,
   Bot,
-  Layers,
-  Check,
-  Copy,
   AlertTriangle
 } from "lucide-react";
+import { ModeSelector } from "@bis/ui";
 import { useTranslation } from "@/lib/i18n";
-import Image from "next/image";
 
 export default function LandingPage() {
   const router = useRouter();
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentRole, setCurrentRole] = useState<UserRole>(UserRole.PROCUREMENT_OFFICER);
-  const [copiedSampleIdx, setCopiedSampleIdx] = useState<number | null>(null);
 
   const roleData: Record<
     string,
@@ -117,50 +105,35 @@ export default function LandingPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16 relative z-10">
         {/* Hero Section */}
         <div className="text-center space-y-6 max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#10243A] border border-[#B9DDED] dark:border-[#263B50] shadow-xs text-xs font-semibold text-[#0057A8] dark:text-[#16A9D8]">
-            <Sparkles className="w-3.5 h-3.5 text-[#0057A8] dark:text-[#16A9D8]" />
-            <span>Smart India Hackathon 2026 • Problem Statement 26108</span>
-          </div>
-
           {/* Main Title */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#0B1F3A] dark:text-[#F1F5F9] leading-[1.12]">
-            AI-Powered Recommendation Engine for{" "}
+            AI-Powered Recommendation Engine for
+            <br />
             <span className="text-[#0057A8] dark:text-[#16A9D8]">
               Procurement Specifications
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base lg:text-lg text-[#52657A] dark:text-[#AFC1D2] max-w-3xl mx-auto leading-relaxed">
-            Authoritative decision support for <strong>GeM Buyers, PSUs, and Tender Drafting Committees</strong> to instantly identify applicable Indian Standards (IS), enforce mandatory Quality Control Orders (QCO), eliminate GFR 144(i) brand bias, and generate Pre-Dispatch Inspection schedules.
+          <p className="text-sm sm:text-base lg:text-lg text-[#52657A] dark:text-[#AFC1D2] max-w-2xl mx-auto leading-relaxed">
+            Empowering <strong>GeM Buyers, PSUs, & Tender Committees</strong> to enforce IS/QCO compliance, eliminate brand bias, and streamline procurement specifications.
           </p>
 
           {/* Role Persona Switcher */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-            {[
-              { role: UserRole.PROCUREMENT_OFFICER, label: "Procurement Officer", icon: FileCheck2 },
-              { role: UserRole.BUYER_GEM, label: "GeM Buyer", icon: Layers },
-              { role: UserRole.QA_ENGINEER, label: "QA & Inspection Engineer", icon: FlaskConical },
-              { role: UserRole.BIDDER_SUPPLIER, label: "Bidder / Supplier", icon: ShieldCheck },
-            ].map(({ role, label, icon: Icon }) => (
-              <button
-                key={role}
-                type="button"
-                onClick={() => setCurrentRole(role)}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${currentRole === role
-                    ? "bg-[#0057A8] text-white shadow-md shadow-blue-900/20 scale-105"
-                    : "bg-white dark:bg-[#10243A] text-[#52657A] dark:text-[#AFC1D2] border border-[#D8E3EE] dark:border-[#263B50] hover:bg-[#F1F7FC]"
-                  }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{label}</span>
-              </button>
-            ))}
+          <div className="mt-6 max-w-4xl mx-auto text-left">
+            <div className="flex items-center justify-between mb-2.5">
+              <span className="text-xs font-bold text-[#52657A] dark:text-[#AFC1D2] uppercase tracking-wider">
+                {t("hero.select_profile", "SELECT YOUR PROFILE MODE:")}
+              </span>
+            </div>
+            <ModeSelector
+              currentMode={currentRole}
+              onModeChange={setCurrentRole}
+            />
           </div>
 
           {/* Search Query Box */}
-          <div className="max-w-2xl mx-auto pt-2">
+          <div className="max-w-3xl mx-auto pt-2">
             <form onSubmit={handleSearchSubmit} className="relative group">
               <div className="relative flex items-center rounded-2xl bg-white dark:bg-[#10243A] border-2 border-[#D8E3EE] dark:border-[#263B50] shadow-[0_8px_30px_rgba(11,31,58,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] focus-within:border-[#0057A8] dark:focus-within:border-[#16A9D8] transition-all p-1.5">
                 <Search className="w-5 h-5 text-slate-400 ml-3 shrink-0" />
@@ -175,7 +148,7 @@ export default function LandingPage() {
                   type="submit"
                   className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-[#0057A8] hover:bg-[#004783] text-white shadow-sm transition-all shrink-0 cursor-pointer"
                 >
-                  <span>Analyze</span>
+                  <span>Ask AI</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -188,7 +161,7 @@ export default function LandingPage() {
                   key={idx}
                   type="button"
                   onClick={() => handlePromptClick(prompt)}
-                  className="text-[11px] text-slate-600 dark:text-slate-400 bg-white/80 dark:bg-[#10243A]/80 border border-slate-200 dark:border-slate-700/80 px-2.5 py-1 rounded-lg hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
+                  className="text-[13px] text-slate-600 dark:text-slate-400 bg-white/80 dark:bg-[#10243A]/80 border border-slate-200 dark:border-slate-700/80 px-2.5 py-1 rounded-lg hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-left"
                 >
                   &ldquo;{prompt.length > 55 ? prompt.slice(0, 52) + "..." : prompt}&rdquo;
                 </button>
