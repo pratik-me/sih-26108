@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComplianceRoadmapStep } from '@bis/shared-types';
-import { CheckCircle2, Clock, CircleDot, FileCheck, ArrowRight, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, Clock, CircleDot, FileCheck } from 'lucide-react';
 
 interface ComplianceStepProps {
   step: ComplianceRoadmapStep;

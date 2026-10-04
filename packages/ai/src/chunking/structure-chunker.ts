@@ -66,7 +66,7 @@ export class StructureAwareDocumentChunker {
     let currentBuffer: string[] = [];
 
     // Regex for Clause detection: e.g. "4.1 General", "Clause 5.2", "12.3.1 Acceptance Criteria"
-    const clauseRegex = /^(?:Clause\s+)?(\d+(?:\.\d+)+)\s+([A-Z0-9\s.,\-\(\)]+)/i;
+    const clauseRegex = /^(?:Clause\s+)?(\d+(?:\.\d+)*)\s+(.+?)(?:\s*[:-])*$/i;
     const pageRegex = /(?:Page|\f)\s*(\d+)/i;
 
     for (const line of lines) {

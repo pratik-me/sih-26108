@@ -1,6 +1,6 @@
 import React from 'react';
 import { StandardRecommendationMatch } from '@bis/shared-types';
-import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck, ExternalLink } from 'lucide-react';
+import { CheckCircle2, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { SourceFreshnessBadge } from './SourceFreshnessBadge';
 
 interface RecommendationCardProps {

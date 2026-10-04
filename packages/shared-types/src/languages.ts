@@ -222,7 +222,7 @@ export const SUPPORTED_LANGUAGES: Record<IndianLanguage, LanguageInfo> = {
 };
 
 export const SCHEDULED_22_LANGUAGES = Object.values(SUPPORTED_LANGUAGES).filter(
-  (l: any) => l.isScheduled22,
+  (l: LanguageInfo) => l.isScheduled22,
 );
 
 export function getLanguageInfo(code: string | IndianLanguage): LanguageInfo {

@@ -1,4 +1,4 @@
-import { BOQItem, PDISchedule, TenderSpecification, GFRViolationClause } from '@bis/shared-types';
+import { PDISchedule, TenderSpecification } from '@bis/shared-types';
 
 export const SEED_SAMPLE_TENDERS: TenderSpecification[] = [
   {

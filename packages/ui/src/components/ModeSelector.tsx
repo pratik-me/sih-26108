@@ -5,9 +5,6 @@ import {
   Layers,
   FlaskConical,
   ShieldCheck,
-  Factory,
-  ShoppingBag,
-  GraduationCap,
   Check,
   LucideIcon
 } from 'lucide-react';

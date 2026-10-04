@@ -1,6 +1,6 @@
 import React from 'react';
 import { GfrAuditResult, GFRViolationClause } from '@bis/shared-types';
-import { ShieldCheck, ShieldAlert, AlertTriangle, Check, Copy, FileCode } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, AlertTriangle, Check, Copy } from 'lucide-react';
 
 interface GfrAuditBadgeProps {
   auditResult: GfrAuditResult;

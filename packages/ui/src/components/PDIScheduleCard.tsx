@@ -1,6 +1,6 @@
 import React from 'react';
 import { PDISchedule, PDITestItem } from '@bis/shared-types';
-import { ClipboardCheck, CheckCircle2, Shield, Eye, Flame, AlertCircle } from 'lucide-react';
+import { ClipboardCheck, CheckCircle2, Shield, Eye, Flame } from 'lucide-react';
 
 interface PDIScheduleCardProps {
   schedule: PDISchedule;

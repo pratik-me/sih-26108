@@ -3,12 +3,10 @@ import { PrismaService } from '../common/prisma.service';
 import {
   ActiveStandardReplacement,
   BOQItem,
-  ExtractedParameter,
   GFRViolationClause,
   GfrAuditResult,
   NormativeReferenceStandard,
   QCOMandate,
-  Standard,
   StandardRecommendation,
   SupersededStandardMapping,
   TenderSpecification
@@ -17,7 +15,6 @@ import {
   SEED_STANDARDS,
   SEED_SUPERSEDED_STANDARDS,
   SEED_SAMPLE_TENDERS,
-  SEED_PDI_SCHEDULES,
   findSupersededStandard
 } from '@bis/seed-data';
 import { StandardsService } from '../standards/standards.service';
@@ -55,14 +52,14 @@ export class ProcurementService {
     let itemIdx = 1;
 
     for (const line of lines) {
-      const isItemHeader = /^(?:item|line|sl\.?\s*no\.?|\d+[\.\)])\s*[:\-]?\s*(.+)/i.test(line);
+      const isItemHeader = /^(?:item|line|sl\.?\s*no\.?|\d+[.)])\s*[:-]?\s*(.+)/i.test(line);
       const isParamLine = /[:=–—]/.test(line);
 
       if (isItemHeader || (!currentItem && lines.indexOf(line) === 0)) {
         if (currentItem && currentItem.title) {
           boqItems.push(this.finalizeBOQItem(currentItem, itemIdx++));
         }
-        const titleMatch = line.match(/^(?:item|line|sl\.?\s*no\.?|\d+[\.\)])\s*[:\-]?\s*(.+)/i);
+        const titleMatch = line.match(/^(?:item|line|sl\.?\s*no\.?|\d+[.)])\s*[:-]?\s*(.+)/i);
         currentItem = {
           itemNumber: itemIdx,
           title: titleMatch ? titleMatch[1].trim() : line.slice(0, 80),
@@ -210,7 +207,7 @@ export class ProcurementService {
 
     // Check 1: Brand / Proprietary make bias (e.g. "ABB / Sungrow / SMA only", "SAIL / TATA only", "KraussMaffei only")
     const brandPatterns = [
-      { pattern: /(?:preferred\s+make|make\s*[:\-]|brands?\s*[:\-]|\bonly\s+from)\s*([A-Za-z0-9,\s\/]+(?:only|preferred)?)/i, type: 'BRAND_SPECIFIC' as const, rule: 'GFR 2017 Rule 144(i)' },
+      { pattern: /(?:preferred\s+make|make\s*[:-]|brands?\s*[:-]|\bonly\s+from)\s*([A-Za-z0-9,\s/]+(?:only|preferred)?)/i, type: 'BRAND_SPECIFIC' as const, rule: 'GFR 2017 Rule 144(i)' },
       { pattern: /(?:primary\s+producers?\s+only|blast\s+furnace\s+only|disqualifying\s+secondary)/i, type: 'TAILOR_MADE_CRITERIA' as const, rule: 'DPIIT / Public Procurement Policy' },
       { pattern: /(?:kraussmaffei|siemens\s+only|cisco\s+only|schneider\s+only)/i, type: 'BRAND_SPECIFIC' as const, rule: 'GFR 2017 Rule 144(i)' }
     ];

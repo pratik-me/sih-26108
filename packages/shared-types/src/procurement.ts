@@ -1,4 +1,4 @@
-import { Standard, StandardClause } from './standards';
+import { Standard } from './standards';
 import { Evidence } from './rag';
 
 export interface ExtractedParameter {
