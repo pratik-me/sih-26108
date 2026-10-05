@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../common/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { RAGEvaluationResultMetrics } from '@bis/shared-types';
 
 @Injectable()

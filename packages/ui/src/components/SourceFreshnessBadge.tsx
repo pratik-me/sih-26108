@@ -12,7 +12,6 @@ interface SourceFreshnessBadgeProps {
 export const SourceFreshnessBadge: React.FC<SourceFreshnessBadgeProps> = ({
   status,
   year,
-  lastUpdatedDate,
   className = ''
 }) => {
   switch (status) {

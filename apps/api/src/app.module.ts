@@ -14,7 +14,7 @@ import { FeedbackModule } from './feedback/feedback.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { AdminModule } from './admin/admin.module';
 import { DocumentsModule } from './documents/documents.module';
-import { PrismaService } from './common/prisma.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import { PrismaService } from './common/prisma.service';
       isGlobal: true,
       envFilePath: ['../../.env', '.env']
     }),
+    PrismaModule,
     AuthModule,
     ProcurementModule,
     StandardsModule,
@@ -36,8 +37,6 @@ import { PrismaService } from './common/prisma.service';
     AnalyticsModule,
     AdminModule,
     DocumentsModule
-  ],
-  providers: [PrismaService],
-  exports: [PrismaService]
+  ]
 })
 export class AppModule {}

@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
   }
 }
 
-import { configurePrismaEngine } from "./common/prisma-engine";
+import { configurePrismaEngine } from "./prisma/prisma-engine";
 
 // Configure Prisma Engine immediately on process startup
 configurePrismaEngine();
@@ -87,17 +87,26 @@ async function bootstrap(): Promise<INestApplication> {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api/docs", app, document);
 
+  const isServerless = Boolean(
+    process.env.VERCEL ||
+      process.env.AWS_LAMBDA_FUNCTION_NAME ||
+      process.env.LAMBDA_TASK_ROOT ||
+      process.env.NETLIFY ||
+      process.env.SERVERLESS,
+  );
+
   await app.init();
   cachedApp = app;
 
-  if (!process.env.VERCEL) {
-    const port = process.env.PORT || 4000;
-    await app.listen(port);
+  if (!isServerless) {
+    const port = Number(process.env.PORT) || 4000;
+    const host = process.env.HOST || "0.0.0.0";
+    await app.listen(port, host);
     console.log(
-      `🚀 Manak Setu AI API running on http://localhost:${port}/api/v1`,
+      `🚀 Manak Setu AI API running on http://${host === "0.0.0.0" ? "localhost" : host}:${port}/api/v1`,
     );
     console.log(
-      `📚 Swagger documentation available at http://localhost:${port}/api/docs`,
+      `📚 Swagger documentation available at http://${host === "0.0.0.0" ? "localhost" : host}:${port}/api/docs`,
     );
 
     // Log detected LLM Configuration
@@ -145,12 +154,23 @@ async function bootstrap(): Promise<INestApplication> {
   return cachedApp;
 }
 
-// In local environment, start the server
-if (!process.env.VERCEL) {
-  bootstrap();
+const isServerless = Boolean(
+  process.env.VERCEL ||
+    process.env.AWS_LAMBDA_FUNCTION_NAME ||
+    process.env.LAMBDA_TASK_ROOT ||
+    process.env.NETLIFY ||
+    process.env.SERVERLESS,
+);
+
+// For standalone / server / container environments
+if (!isServerless) {
+  bootstrap().catch((err) => {
+    console.error("Fatal error during API bootstrap:", err);
+    process.exit(1);
+  });
 }
 
-// Serverless request handler for Vercel
+// For serverlessenvironments
 async function handler(req: any, res: any) {
   const app = await bootstrap();
   const server = app.getHttpAdapter().getInstance();

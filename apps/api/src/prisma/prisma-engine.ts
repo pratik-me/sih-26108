@@ -1,22 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-/**
- * Ensures the Prisma query engine binary is located and made available
- * to Prisma Client on serverless runtimes like Vercel (AWS Lambda).
- */
 export function configurePrismaEngine(): string | null {
   const isLinux = process.platform === 'linux';
   const isWindows = process.platform === 'win32';
   const isDarwin = process.platform === 'darwin';
-
-  const binaryName = isLinux
-    ? 'libquery_engine-rhel-openssl-3.0.x.so.node'
-    : isWindows
-    ? 'query_engine-windows.dll.node'
-    : isDarwin
-    ? (process.arch === 'arm64' ? 'libquery_engine-darwin-arm64.dylib.node' : 'libquery_engine-darwin.dylib.node')
-    : 'libquery_engine-rhel-openssl-3.0.x.so.node';
 
   // If already set and the file exists, we're all good
   if (
@@ -26,24 +14,40 @@ export function configurePrismaEngine(): string | null {
     return process.env.PRISMA_QUERY_ENGINE_LIBRARY;
   }
 
-  // 1. Static reference for @vercel/nft to trace and bundle the binary
-  const bundledLinuxEngine = path.join(__dirname, 'libquery_engine-rhel-openssl-3.0.x.so.node');
+  const binaryNames = isLinux
+    ? [
+        'libquery_engine-debian-openssl-3.0.x.so.node',
+        'libquery_engine-rhel-openssl-3.0.x.so.node',
+        'libquery_engine-linux-musl-openssl-3.0.x.so.node',
+      ]
+    : isWindows
+    ? ['query_engine-windows.dll.node']
+    : isDarwin
+    ? [
+        process.arch === 'arm64'
+          ? 'libquery_engine-darwin-arm64.dylib.node'
+          : 'libquery_engine-darwin.dylib.node',
+      ]
+    : ['libquery_engine-rhel-openssl-3.0.x.so.node'];
 
-  // 2. Candidate locations where Vercel / Lambda might place the binary
-  const candidatePaths = [
-    path.join(__dirname, binaryName),
-    path.join(__dirname, 'dist', binaryName),
-    path.join(process.cwd(), binaryName),
-    path.join(process.cwd(), 'dist', binaryName),
-    path.join(process.cwd(), 'apps', 'api', binaryName),
-    path.join(process.cwd(), 'apps', 'api', 'dist', binaryName),
-    path.join('/var/task', binaryName),
-    path.join('/var/task', 'dist', binaryName),
-    path.join('/tmp/prisma-engines', binaryName),
+  const candidateDirs = [
+    __dirname,
+    path.join(__dirname, '..'),
+    path.join(__dirname, 'dist'),
+    process.cwd(),
+    path.join(process.cwd(), 'dist'),
+    path.join(process.cwd(), 'apps', 'api'),
+    path.join(process.cwd(), 'apps', 'api', 'dist'),
+    '/var/task',
+    '/var/task/dist',
+    '/tmp/prisma-engines',
   ];
 
-  if (isLinux) {
-    candidatePaths.unshift(bundledLinuxEngine);
+  const candidatePaths: string[] = [];
+  for (const bName of binaryNames) {
+    for (const cDir of candidateDirs) {
+      candidatePaths.push(path.join(cDir, bName));
+    }
   }
 
   for (const candidate of candidatePaths) {
@@ -51,28 +55,29 @@ export function configurePrismaEngine(): string | null {
       process.env.PRISMA_QUERY_ENGINE_LIBRARY = candidate;
       console.log(`[Prisma Engine] Located query engine at: ${candidate}`);
 
-      // Ensure /tmp/prisma-engines also has a copy (Prisma's built-in fallback search path)
+      // Ensure /tmp/prisma-engines also has a copy
       try {
         const tmpDir = '/tmp/prisma-engines';
         if (!fs.existsSync(tmpDir)) {
           fs.mkdirSync(tmpDir, { recursive: true });
         }
-        const tmpFile = path.join(tmpDir, binaryName);
+        const engineFile = path.basename(candidate);
+        const tmpFile = path.join(tmpDir, engineFile);
         if (!fs.existsSync(tmpFile)) {
           fs.copyFileSync(candidate, tmpFile);
           console.log(`[Prisma Engine] Copied engine to fallback: ${tmpFile}`);
         }
       } catch (err) {
-        // Non-fatal if /tmp write fails
+        return null;
       }
 
       return candidate;
     }
   }
 
-  // 3. Fallback: Search directories recursively
+  // Fallback to Search directories recursively
   try {
-    const searchRoots = ['/var/task', process.cwd(), __dirname].filter(dir => {
+    const searchRoots = ['/var/task', process.cwd(), __dirname].filter((dir) => {
       try {
         return fs.existsSync(dir);
       } catch {
@@ -86,7 +91,7 @@ export function configurePrismaEngine(): string | null {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
         for (const entry of entries) {
           const fullPath = path.join(dir, entry.name);
-          if (entry.isFile() && entry.name === binaryName) {
+          if (entry.isFile() && binaryNames.includes(entry.name)) {
             return fullPath;
           }
           if (
@@ -113,9 +118,11 @@ export function configurePrismaEngine(): string | null {
         try {
           const tmpDir = '/tmp/prisma-engines';
           if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
-          const tmpFile = path.join(tmpDir, binaryName);
+          const tmpFile = path.join(tmpDir, path.basename(found));
           if (!fs.existsSync(tmpFile)) fs.copyFileSync(found, tmpFile);
-        } catch {}
+        } catch {
+          return null;
+        }
 
         return found;
       }
@@ -125,7 +132,7 @@ export function configurePrismaEngine(): string | null {
   }
 
   console.warn(
-    `[Prisma Engine] Warning: Could not locate ${binaryName} in:`,
+    `[Prisma Engine] Warning: Could not locate query engine in:`,
     candidatePaths,
   );
   return null;

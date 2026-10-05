@@ -17,13 +17,11 @@ import {
   ConfidenceBadge,
   EvidencePanel,
   LanguageSelector,
-  SourceFreshnessBadge,
 } from "@bis/ui";
 import { useTranslation } from "@/lib/i18n";
 import {
   Send,
   Plus,
-  Trash2,
   ThumbsUp,
   ThumbsDown,
   Flag,
@@ -35,11 +33,9 @@ import {
   Award,
   FlaskConical,
   Building2,
-  FileText,
   Copy,
   Check,
   FileBarChart2,
-  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import {

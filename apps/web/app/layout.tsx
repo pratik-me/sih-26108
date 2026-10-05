@@ -9,7 +9,7 @@ import { Footer } from "../components/Footer";
 import { FloatingAskAI } from "../components/FloatingAskAI";
 
 export const metadata: Metadata = {
-  title: "Manak Setu AI — AI Recommendation Engine for Procurement Specifications (SIH 26108)",
+  title: "Manak Setu AI",
   description:
     "Authoritative AI decision-support platform for identifying applicable Indian Standards (IS), enforcing mandatory Quality Control Orders (QCOs), and ensuring GFR 2017 Rule 144(i) compliance in public procurement tenders on GeM.",
   keywords:

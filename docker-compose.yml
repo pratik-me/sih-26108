@@ -1,24 +1,6 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: pgvector/pgvector:pg16
-    container_name: bis_saarthi_db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword
-      POSTGRES_DB: bis_saarthi
-    ports:
-      - '5432:5432'
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d bis_saarthi']
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
   api:
     build:
       context: .
@@ -27,15 +9,12 @@ services:
     restart: unless-stopped
     ports:
       - '4000:4000'
+    env_file:
+      - .env
     environment:
-      DATABASE_URL: "postgresql://postgres:postgrespassword@postgres:5432/bis_saarthi?schema=public"
       PORT: 4000
+      HOST: "0.0.0.0"
       NODE_ENV: production
-      JWT_SECRET: "bis_prod_secret_key_2026_gov_portal"
-      JWT_REFRESH_SECRET: "bis_prod_refresh_secret_2026_gov"
-    depends_on:
-      postgres:
-        condition: service_healthy
 
   web:
     build:
@@ -45,11 +24,12 @@ services:
     restart: unless-stopped
     ports:
       - '3000:3000'
+    env_file:
+      - .env
     environment:
+      PORT: 3000
+      NODE_ENV: production
+      API_URL: "http://api:4000/api/v1"
       NEXT_PUBLIC_API_URL: "http://localhost:4000/api/v1"
-      NEXT_PUBLIC_APP_NAME: "BIS Saarthi"
     depends_on:
       - api
-
-volumes:
-  pgdata:

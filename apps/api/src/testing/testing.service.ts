@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../common/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { PDISchedule, TestingRequirement, TestingSearchFilter } from '@bis/shared-types';
 import { SEED_PDI_SCHEDULES } from '@bis/seed-data';
 

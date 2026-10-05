@@ -1,6 +1,6 @@
 import React from 'react';
 import { StandardRecommendation } from '@bis/shared-types';
-import { ShieldCheck, AlertTriangle, FileText, CheckCircle2, ArrowRight, BookOpen } from 'lucide-react';
+import { ShieldCheck, AlertTriangle, FileText, ArrowRight, BookOpen } from 'lucide-react';
 
 interface ProcurementCardProps {
   recommendation: StandardRecommendation;
