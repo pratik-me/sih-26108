@@ -4,7 +4,7 @@ The demo video is **optional**, but strongly recommended if your project has a w
 
 ## Demo video link
 
-`https://drive.google.com/file/d/1EnS0QGpDIGhGzfqF7aX_yZfmO1pi1Qb4/view`
+`https://www.youtube.com/watch?v=ihtzYFYIUdw`
 
 ## What the video should show
 
