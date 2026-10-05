@@ -140,7 +140,7 @@ export function Footer() {
 
         <div className="pt-6 border-t border-[#163358] dark:border-[#263B50] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#B8C7D6]">
           <div>
-            © {new Date().getFullYear()} Manak Setu AI (Manak Setu Procurement Edition) — Smart India Hackathon 2026 (PS: SIH 26108).
+            © {new Date().getFullYear()} Manak Setu AI
           </div>
           <div className="flex items-center gap-4">
             <Link href="/chat" className="text-[#D9E8F5] hover:text-[#0E9FCE] transition-colors">
